@@ -1,0 +1,131 @@
+<!-- Flights Section -->
+<div class="content">
+<h2>Flights</h2>
+<button (click)="showAddFlightForm = !showAddFlightForm">
+  {{ showAddFlightForm ? 'Cancel' : 'Add Flight' }}
+</button>
+
+<form *ngIf="showAddFlightForm" (submit)="addFlight()" #flightForm="ngForm">
+  <input [(ngModel)]="newFlight.flightNumber" name="flightNumber" placeholder="Flight number" required>
+  <input [(ngModel)]="newFlight.departureLocation" name="departureLocation" placeholder="From" required>
+  <input [(ngModel)]="newFlight.arrivalLocation" name="arrivalLocation" placeholder="To" required>
+  <input [(ngModel)]="newFlight.flightDuration" name="flightDuration" placeholder="Duration" required>
+  <input [(ngModel)]="newFlight.date" name="date" type="date" placeholder="Date" required>
+  <label>
+    <input [(ngModel)]="newFlight.roundTrip" name="roundTrip" type="checkbox"> Round trip
+  </label>
+  <input [(ngModel)]="newFlight.seatNumber" name="seatNumber" placeholder="Seat number" required>
+  <button type="submit" [disabled]="!flightForm.form.valid">Add Flight</button>
+</form>
+
+<ul>
+  <li *ngFor="let f of flights">
+    <strong>{{ f.flightNumber }}</strong><br>
+    Seat number: {{ f.seatNumber }}<br>
+    {{ f.departureLocation }} → {{ f.arrivalLocation }}<br>
+    Duration: {{ f.flightDuration }}<br>
+    Date: {{ f.date }}<br>
+    Round trip: {{ f.roundTrip }}<br>
+    <button (click)="deleteFlight(f.flightNumber, f.seatNumber)">Delete</button>
+    <button (click)="editFlight(f)">Edit</button>
+  </li>
+</ul>
+
+<div *ngIf="editMode.flight">
+  <h3>Edit Flight</h3>
+  <form (submit)="updateFlight()">
+    <strong>{{ editingFlight.flightNumber }} \ {{ editingFlight.seatNumber }}</strong>
+    <input [(ngModel)]="editingFlight.departureLocation" name="editDepartureLocation" placeholder="From">
+    <input [(ngModel)]="editingFlight.arrivalLocation" name="editArrivalLocation" placeholder="To">
+    <input [(ngModel)]="editingFlight.flightDuration" name="editFlightDuration" placeholder="Duration">
+    <input [(ngModel)]="editingFlight.date" name="editDate" type="date" placeholder="Date">
+    <label>
+      <input [(ngModel)]="editingFlight.roundTrip" name="editRoundTrip" type="checkbox"> Round trip
+    </label>
+    <button type="submit">Update Flight</button>
+  </form>
+</div>
+
+<hr>
+
+<!-- Passengers Section -->
+<h2>Passengers</h2>
+<button (click)="showAddPassengerForm = !showAddPassengerForm">
+  {{ showAddPassengerForm ? 'Cancel' : 'Add Passenger' }}
+</button>
+
+<form *ngIf="showAddPassengerForm" (submit)="addPassenger()" #passengerForm="ngForm">
+  <input [(ngModel)]="newPassenger.firstName" name="firstName" placeholder="First name" [pattern]="'[a-zA-Z ]*'" required>
+  <input [(ngModel)]="newPassenger.lastName" name="lastName" placeholder="Last name" [pattern]="'[a-zA-Z ]*'" required>
+  <input [(ngModel)]="newPassenger.email" name="email" placeholder="Email" [email]="true" required>
+  <input [(ngModel)]="newPassenger.phone" name="phone" placeholder="Phone" [pattern]="'[0-9+]*'" required>
+  <button type="submit" [disabled]="!passengerForm.form.valid">Add Passenger</button>
+</form>
+
+<ul>
+  <li *ngFor="let p of passengers">
+    <strong>{{ p.firstName }} {{ p.lastName }}</strong><br>
+    Email: {{ p.email }}<br>
+    Phone: {{ p.phone }}<br>
+    <button (click)="deletePassenger(p.email)">Delete</button>
+    <button (click)="editPassenger(p)">Edit</button>
+  </li>
+</ul>
+
+<div *ngIf="editMode.passenger">
+  <h3>Edit Passenger</h3>
+  <form (submit)="updatePassenger()">
+    <input [(ngModel)]="editingPassenger.firstName" name="editFirstName" placeholder="First name">
+    <input [(ngModel)]="editingPassenger.lastName" name="editLastName" placeholder="Last name">
+    <input [(ngModel)]="editingPassenger.phone" name="editPhone" placeholder="Phone">
+    <button type="submit">Update Passenger</button>
+  </form>
+</div>
+
+<hr>
+
+<!-- Reservations Section -->
+<h2>Reservations</h2>
+<button (click)="showAddReservationForm = !showAddReservationForm">
+  {{ showAddReservationForm ? 'Cancel' : 'Add Reservation' }}
+</button>
+
+<form *ngIf="showAddReservationForm" (submit)="addReservation()" #reservationForm="ngForm">
+  <input [(ngModel)]="newReservation.reservationNumber" name="reservationNumber" placeholder="Reservation number" required>
+  <input [(ngModel)]="newReservation.flightNumber" name="flightNumberR" placeholder="Flight number" required>
+  <input [(ngModel)]="newReservation.seatNumber" name="seatNumberR" placeholder="Seat number" required>
+  <input [(ngModel)]="newReservation.passengerEmail" name="passengerEmail" placeholder="Passenger email" [email]="true" required>
+  <label>
+    <input [(ngModel)]="newReservation.isDeparted" name="isDeparted" type="checkbox"> Departed
+  </label>
+  <button type="submit" [disabled]="!reservationForm.form.valid">Add Reservation</button>
+</form>
+
+<ul>
+  <li *ngFor="let r of reservations">
+    <strong>{{ r.reservationNumber }}</strong><br>
+    Flight: {{ r.flightNumber }}<br>
+    Seat: {{ r.seatNumber }}<br>
+    Passenger: {{ r.passengerFirstName }} {{ r.passengerLastName }}<br>
+    Email: {{ r.passengerEmail }}<br>
+    Phone: {{ r.passengerPhone }}<br>
+    Departed: {{ r.isDeparted }}
+    <button (click)="deleteReservation(r.reservationNumber)">Delete</button>
+    <button (click)="editReservation(r)">Edit</button>
+  </li>
+</ul>
+
+<div *ngIf="editMode.reservation">
+  <h3>Edit Reservation</h3>
+  <form (submit)="updateReservation()">
+    <input [(ngModel)]="editingReservation.reservationNumber" name="editReservationNumber" placeholder="Reservation number">
+    <input [(ngModel)]="editingReservation.flightNumber" name="editFlightNumberR" placeholder="Flight number">
+    <input [(ngModel)]="editingReservation.seatNumber" name="editSeatNumberR" placeholder="Seat number">
+    <input [(ngModel)]="editingReservation.passengerEmail" name="editPassengerEmail" placeholder="Passenger email">
+    <label>
+      <input [(ngModel)]="editingReservation.isDeparted" name="editIsDeparted" type="checkbox"> Departed
+    </label>
+    <button type="submit">Update Reservation</button>
+  </form>
+</div>
+</div>

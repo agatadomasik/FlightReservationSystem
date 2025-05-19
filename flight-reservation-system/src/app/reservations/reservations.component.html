@@ -1,0 +1,11 @@
+<h2>Reservations</h2>
+<ul>
+  <li *ngFor="let r of reservations">
+    <strong>{{ r.reservationNumber }}</strong><br>
+    Flight number: {{ r.flightNumber }}<br>
+    Seat number: {{ r.seatNumber }}<br>
+    Passenger name: {{ r.passengerFirstName }} {{ r.passengerLastName }}<br>
+    Passenger email address: {{ r.passengerEmail }}<br>
+    Passenger phone number: {{ r.passengerPhone }}
+  </li>
+</ul>

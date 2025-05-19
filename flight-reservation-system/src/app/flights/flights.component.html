@@ -1,0 +1,10 @@
+<h2>Flights</h2>
+<ul>
+  <li *ngFor="let f of flights">
+    <strong>{{ f.flightNumber }}</strong><br>
+    {{ f.departureLocation }} → {{ f.arrivalLocation }}<br>
+    Duration: {{ f.flightDuration }}<br>
+    Round trip: {{ f.roundTrip }}<br>
+    Seat number: {{ f.seatNumber }} <br>
+  </li>
+</ul>
