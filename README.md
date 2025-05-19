@@ -1,20 +1,20 @@
 # Flight Reservation System
 
-## Opis
-Prosty system do zarządzania rezerwacjami lotów napisany w Javie ze Spring Boot. Umożliwia CRUD dla lotów, pasażerów i rezerwacji, zawiera walidację danych, wysyłkę e-maili z potwierdzeniem oraz testy jednostkowe. Frontend w Angularze, baza H2 w trybie in-memory.
+## Description
+A simple flight reservation management system written in Java using Spring Boot. Supports CRUD operations for flights, passengers, and reservations. Includes data validation, email confirmation sending, and unit tests. Frontend built with Angular, using H2 in-memory database.
 
-## Technologie
+## Technologies
 - **Backend:** Java 21, Spring Boot 3.3.4, Spring Data JPA, Spring Mail, H2, Lombok, Maven  
 - **Frontend:** Angular 17  
-- **Testy:** JUnit 5, Mockito  
+- **Testing:** JUnit 5, Mockito  
 
-## Funkcjonalności
-- CRUD lotów, pasażerów i rezerwacji  
-- Walidacja danych i dostępności miejsc  
-- Automatyczne wysyłanie e-maili z potwierdzeniem  
-- Konsolowa wersja aplikacji (CommandLineRunner)  
+## Features
+- CRUD for flights, passengers, and reservations  
+- Data validation and seat availability checks  
+- Automatic email confirmation after booking  
+- Console version of the app (CommandLineRunner)  
 
-## Model danych
-- **Flight:** numer lotu, miejsce wylotu/przylotu, data, czas trwania, miejsce  
-- **Passenger:** imię, nazwisko, unikalny e-mail, telefon  
-- **Reservation:** unikalny numer, lot, miejsce, dane pasażera, status wylotu  
+## Data Model
+- **Flight:** flight number, departure/arrival locations, date, duration, seat number  
+- **Passenger:** first name, last name, unique email, phone  
+- **Reservation:** unique reservation number, flight, seat, passenger details, departure status  
